@@ -42,6 +42,18 @@ const SignMeUp = ({ signupCallback }) => {
 
   //console.log("src/SignMeUp called");
 
+  if (context.loggedInUserEmail) {
+    return (
+      <div className="container">
+        <div className="content">
+          <span>Logged In User Email: {context.loggedInUserEmail}</span>
+          &nbsp;&nbsp;
+          <a href="/logout">Logout</a>
+        </div>
+      </div>
+    );
+  }
+
   return context.showSignMeUp === false ? null : (
     <div className="container">
       <div>
@@ -67,6 +79,7 @@ const SignMeUp = ({ signupCallback }) => {
           >
             {buttonText}
           </button>
+          &nbsp;&nbsp;<a href="/login">Login</a>
         </div>
       </div>
     </div>
