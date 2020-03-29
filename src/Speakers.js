@@ -1,21 +1,12 @@
-import React, {
-  useState,
-  useEffect,
-  useContext,
-  useReducer,
-  useCallback,
-  useMemo
-} from "react";
-
+import React, { useState, useContext, useCallback, useMemo } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../static/site.css";
 import { Header } from "../src/Header";
 import { Menu } from "../src/Menu";
-import SpeakerData from "./SpeakerData";
 import SpeakerDetail from "./SpeakerDetail";
 import { ConfigContext } from "./App";
-import SpeakersReducer from "./SpeakersReducer";
 import useAxiosFetch from "./useAxiosFetch";
+import axios from "axios";
 
 const Speakers = ({}) => {
   const {
@@ -23,42 +14,31 @@ const Speakers = ({}) => {
     isLoading,
     hasErrored,
     errorMessage,
-    updateRecordCard
+    updateDataRecord
   } = useAxiosFetch("http://localhost:4000/speakers", []);
 
   const [speakingSaturday, setSpeakingSaturday] = useState(true);
   const [speakingSunday, setSpeakingSunday] = useState(true);
-
-  // const [speakerList, dispatch] = useReducer(SpeakersReducer, []);
-  // const [isLoading, setIsLoading] = useState(true);
-
   const context = useContext(ConfigContext);
-
-  // useEffect(() => {
-  //   setIsLoading(true);
-  //   new Promise(function(resolve) {
-  //     setTimeout(function() {
-  //       resolve();
-  //     }, 1000);
-  //   }).then(() => {
-  //     setIsLoading(false);
-  //     const speakerListServerFilter = SpeakerData.filter(({ sat, sun }) => {
-  //       return (speakingSaturday && sat) || (speakingSunday && sun);
-  //     });
-  //     // setSpeakerList(speakerListServerFilter);
-  //     dispatch({
-  //       type: "setSpeakerList",
-  //       data: speakerListServerFilter
-  //     });
-  //   });
-  //   return () => {
-  //     console.log("cleanup");
-  //   };
-  // }, []); // [speakingSunday, speakingSaturday]);
 
   const handleChangeSaturday = () => {
     setSpeakingSaturday(!speakingSaturday);
   };
+  const handleChangeSunday = () => {
+    setSpeakingSunday(!speakingSunday);
+  };
+  const heartFavoriteHandler = useCallback((e, speakerRec) => {
+    e.preventDefault();
+    const toggledRec = { ...speakerRec, favorite: !speakerRec.favorite };
+    axios
+      .put(`http://localhost:4000/speakers/${speakerRec.id}`, toggledRec)
+      .then(function(response) {
+        updateDataRecord(toggledRec);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }, []);
 
   const newSpeakerList = useMemo(
     () =>
@@ -80,25 +60,12 @@ const Speakers = ({}) => {
 
   const speakerListFiltered = isLoading ? [] : newSpeakerList;
 
-  if (hasErrored) {
+  if (hasErrored)
     return (
-      <div>{errorMessage}&nbsp;Make sure you launch 'npm run json-server'</div>
+      <div>
+        {errorMessage}&nbsp;"Make sure you have launched "npm run json-server"
+      </div>
     );
-  }
-
-  const handleChangeSunday = () => {
-    setSpeakingSunday(!speakingSunday);
-  };
-
-  const heartFavoriteHandler = useCallback((e, favoriteValue) => {
-    e.preventDefault();
-    const sessionId = parseInt(e.target.attributes["data-sessionid"].value);
-    dispatch({
-      type: favoriteValue === true ? "favorite" : "unfavorite",
-      sessionId
-    });
-    //console.log("changing session favorte to " + favoriteValue);
-  }, []);
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -138,7 +105,7 @@ const Speakers = ({}) => {
         <div className="row">
           <div className="card-deck">
             {speakerListFiltered.map(
-              ({ id, firstName, lastName, bio, favorite }) => {
+              ({ id, firstName, lastName, sat, sun, bio, favorite }) => {
                 return (
                   <SpeakerDetail
                     key={id}
@@ -148,6 +115,8 @@ const Speakers = ({}) => {
                     firstName={firstName}
                     lastName={lastName}
                     bio={bio}
+                    sat={sat}
+                    sun={sun}
                   />
                 );
               }
