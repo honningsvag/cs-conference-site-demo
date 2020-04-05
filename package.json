@@ -1,7 +1,7 @@
 {
   "name": "React-App-Learning-React-Hooks",
   "version": "1.0.0",
-  "description": "",
+  "description": "> A SPA to play around with React Hooks.",
   "main": "index.js",
   "scripts": {
     "dev": "next",
@@ -29,5 +29,13 @@
     "prettier": "1.16.4",
     "react-hooks": "^1.0.1",
     "react-performance": "0.0.5"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/honningsvag/cs-conference-site-demo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/honningsvag/cs-conference-site-demo/issues"
+  },
+  "homepage": "https://github.com/honningsvag/cs-conference-site-demo#readme"
 }

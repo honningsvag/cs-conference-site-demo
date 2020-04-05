@@ -1,12 +1,14 @@
 ## 🎣 React Hooks | CS Conference Website
 
-> A React Hooks learning project taught by Peter Kellner in Pluralsight. Description Below:
+> A SPA to play around with React Hooks.
 
-## pluralsight-course-using-react-hooks
+From the course _[Using React Hooks](https://app.pluralsight.com/library/courses/using-react-hooks)_, taught by Peter Kellner in Pluralsight.
 
-The master branch here is the latest updates to the Pluralsight course published by Peter Kellner in May of 2019 in the master branch.
+[Peter Kellner's Pluralsight Profile](https://app.pluralsight.com/profile/author/peter-kellner)
 
-## Course Code for [Using React Hooks](https://app.pluralsight.com/library/courses/using-react-hooks) on Pluralsight
+[Peter Kellner's Site](https://peterkellner.net/)
+
+***
 
 ### Course Description (from Peter Kellner)
 
@@ -15,9 +17,3 @@ React versions 16.8 and higher, include React Hooks which solve several problems
 In this course, you’ll learn how to use the top seven React Hooks as well as gain the knowledge and experience necessary to build your own customized composite Hook. Along the way, you’ll pick up techniques you can use building real world web apps that include how React Hooks can help you with REST services, reducers, authentication and more.
 
 When you are finished with this course, you’ll confidently be able to combine functional components with React Hooks to build first class React apps. Those apps can be written completely with functional components and React Hooks.
-
-### [Peter Kellner's Site](https://peterkellner.net/)
-
-### [Peter Kellner's Github Profile](https://github.com/pkellner)
-
-### [Peter Kellner's Pluralsight Profile](https://app.pluralsight.com/profile/author/peter-kellner)
